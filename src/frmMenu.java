@@ -11,9 +11,18 @@ public class frmMenu extends JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMenu.class.getName());
 
-    /**
-     * Creates new form frmMenu
-     */
+        public final void centrarForm(JInternalFrame frm){
+            desktopPane.add(frm);
+            frm.setVisible(true);
+            // Centrar
+            frm.setLocation(
+                (desktopPane.getWidth() - frm.getWidth()) / 2,
+                (desktopPane.getHeight() - frm.getHeight()) / 2
+            );
+            // Ocultar menú
+            mostrarMenu(false);    
+        }
+    
     public frmMenu() {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -23,17 +32,7 @@ public class frmMenu extends JFrame {
         jMenuBar1.setVisible(estado);
     }
     
-    public void centrarForm(JInternalFrame frm){
-        desktopPane.add(frm);
-        // Centrar
-        frm.setLocation(
-            (desktopPane.getWidth() - frm.getWidth()) / 2,
-            (desktopPane.getHeight() - frm.getHeight()) / 2
-        );
-        // Ocultar menú
-        mostrarMenu(false);
-        frm.setVisible(true);
-    }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,12 +47,15 @@ public class frmMenu extends JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -74,11 +76,11 @@ public class frmMenu extends JFrame {
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
+        jMenu1.add(jMenuItem2);
 
-        jMenu2.setText("Salir");
-        jMenu2.addActionListener(this::jMenu2ActionPerformed);
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -103,16 +105,20 @@ public class frmMenu extends JFrame {
         centrarForm(frm);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        frmLogin frm = new frmLogin();
+        frmLogin frm = new frmLogin(this);
         centrarForm(frm);
-    }//GEN-LAST:event_formWindowActivated
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -142,8 +148,8 @@ public class frmMenu extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
